@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const APIEndpoint = "https://jsonplaceholder.typicode.com/posts";
+
+const posts = await fetch(APIEndpoint).then((res) => res.json());
+
+const [latestPost] = posts;
+---
+
+<Layout Title="Blog">
+  <h1>Blog</h1>
+
+  <Fragment slot="blogs">
+    <section>
+      <h2>Latest Blog</h2>
+
+      <h3><a href={latestPost.id}>{latestPost.title}</a></h3>
+      <p>{latestPost.body}</p>
+    </section>
+
+    <section>
+      <h2>Blogs</h2>
+
+      <ul>
+        {
+          posts.map((post) => (
+            <li>
+              <h3>
+                <a href={post.id}>{post.title}</a>
+              </h3>
+
+              <p>{post.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </Fragment>
+</Layout>

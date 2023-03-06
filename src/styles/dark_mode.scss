@@ -1,0 +1,10 @@
+button {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.dark {
+  filter: invert(1);
+  background-color: black;
+}

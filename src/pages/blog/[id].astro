@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const APIEndpoint = "https://jsonplaceholder.typicode.com/posts";
+
+  const posts = await fetch(APIEndpoint).then((res) => res.json());
+
+  return posts.map((post) => {
+    const { id } = post;
+
+    return { params: { id }, props: post };
+  });
+}
+
+const { title, body } = Astro.props;
+---
+
+<Layout Title={title}>
+  <h1>{title}</h1>
+
+  <p slot="blogs">
+    {body}
+  </p>
+</Layout>
